@@ -147,7 +147,7 @@ const updateHouse = asyncHandler(async (req, res) => {
 
   const updatedHouse = await house.save();
 
-  res.json(`'${updatedHouse.name}' updated`);
+  res.json({ message: `'${updatedHouse.name}' updated`, house: updatedHouse });
 });
 
 // @desc Delete a house
@@ -157,7 +157,7 @@ const deleteHouse = asyncHandler(async (req, res) => {
   const { id } = req.params;
 
   // Confirm house exists to delete
-  const house = await Note.findById(id).exec();
+  const house = await House.findById(id).exec();
 
   if (!house) {
     return res.status(400).json({ message: "House not found" });
