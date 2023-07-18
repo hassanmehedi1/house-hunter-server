@@ -81,7 +81,7 @@ const bookHouse = asyncHandler(async (req, res) => {
 // @route DELETE /bookings/:id
 // @access Private
 const deleteBooking = asyncHandler(async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.body;
 
   // Confirm booking exists to delete
   const booking = await Booking.findById(id).exec();

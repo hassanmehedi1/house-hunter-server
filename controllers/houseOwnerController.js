@@ -94,8 +94,8 @@ const createNewHouse = asyncHandler(async (req, res) => {
 // @route PATCH /houses
 // @access Private
 const updateHouse = asyncHandler(async (req, res) => {
-  const { id } = req.params;
   const {
+    id,
     name,
     address,
     city,
@@ -111,6 +111,7 @@ const updateHouse = asyncHandler(async (req, res) => {
 
   // Confirm data
   if (
+    !id ||
     !name ||
     !address ||
     !city ||
@@ -154,7 +155,7 @@ const updateHouse = asyncHandler(async (req, res) => {
 // @route DELETE /houses
 // @access Private
 const deleteHouse = asyncHandler(async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.body;
 
   // Confirm house exists to delete
   const house = await House.findById(id).exec();
