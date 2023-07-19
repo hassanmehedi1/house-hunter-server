@@ -14,7 +14,10 @@ connectDB();
 
 app.use(express.json());
 // Allow requests from http://localhost:3000
-const allowedOrigins = ["http://localhost:3000"];
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://house-hunter-client.onrender.com",
+];
 const corsOptions = {
   origin: function (origin, callback) {
     if (allowedOrigins.includes(origin) || !origin) {
@@ -27,8 +30,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
-
 
 app.use(cookieParser());
 
