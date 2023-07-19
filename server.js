@@ -13,7 +13,23 @@ const PORT = process.env.PORT || 5000;
 connectDB();
 
 app.use(express.json());
-app.use(cors());
+// Allow requests from http://localhost:3000
+const allowedOrigins = ["http://localhost:3000"];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true, // Allow credentials (e.g., cookies) to be sent with the request
+};
+
+app.use(cors(corsOptions));
+
+
+
 app.use(cookieParser());
 
 app.use("/", express.static(path.join(__dirname, "public")));
